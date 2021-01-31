@@ -20,13 +20,12 @@ public class Input_Screen extends AppCompatActivity {
             public void onClick(View v) {
                 EditText name = (EditText) findViewById(R.id.Input_Fullname);
                 String fullname= name.getText().toString().trim();
-                Log.i("ter",fullname);
                 Intent intent= new Intent(getApplicationContext(),MainActivity.class);
                 intent.putExtra("Message",fullname);
-                if(1==1) {
-                    setResult(RESULT_OK, intent);
-                }else {
+                if(fullname.matches(".*\\d.*") || !fullname.contains(" ")) {
                     setResult(RESULT_CANCELED, intent);
+                }else {
+                    setResult(RESULT_OK, intent);
                 }
                 finish();
             }

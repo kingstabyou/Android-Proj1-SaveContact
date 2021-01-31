@@ -12,8 +12,10 @@
         android:layout_height="28dp"
         android:layout_marginTop="24dp"
         android:text="@string/Welcome"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="158dp" />
+        app:layout_constraintEnd_toStartOf="@+id/Button_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Button_1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button_1"
@@ -23,6 +25,8 @@
         android:onClick="Enter_Name"
         android:text="@string/Button_1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -31,7 +35,10 @@
         android:layout_width="96dp"
         android:layout_height="54dp"
         android:layout_marginTop="24dp"
+        android:onClick="FetchContact"
         android:text="@string/Button_2"
-        app:layout_constraintTop_toBottomOf="@+id/Button_1"
-        tools:layout_editor_absoluteX="158dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Button_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    String fullname;
+    String Result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,15 +25,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RESULT_OK){
-            String name=data.getStringExtra("Message");
-            Log.i("ter",name);
-        }else if (requestCode==RESULT_CANCELED){
-                Log.i("ee","fail");
+        String fullname=data.getStringExtra("Message");
+        if(resultCode==-1){
+            Result="True";
+        }else if (resultCode==0){
+            Result="False";
         }else{
-            Log.i("ee","fail");
+            Log.i("ee","invalid");
+        }
         }
 
+    public void FetchContact(View view){
+        if (Result.equals("False")){
+            Toast.makeText(getApplicationContext(),"Incorrect name Entered",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(),"Correct name Entered",Toast.LENGTH_SHORT).show();
         }
     }
+}
+
 
