@@ -28,5 +28,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,data.getExtras().getString("name"),Toast.LENGTH_SHORT).show();
         }
     }
-
+// test
 }
