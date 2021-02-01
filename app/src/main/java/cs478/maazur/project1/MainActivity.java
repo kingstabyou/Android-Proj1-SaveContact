@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String fullname=data.getStringExtra("Message");
+        fullname=data.getStringExtra("Message");
+       Log.i("maaz",fullname);
         if(resultCode==-1){
             Result="True";
         }else if (resultCode==0){
@@ -36,10 +37,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
     public void FetchContact(View view){
+       Log.i("maaz",fullname);
         if (Result.equals("False")){
-            Toast.makeText(getApplicationContext(),"Incorrect name Entered",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Incorrect name Entered - "+fullname,Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(),"Correct name Entered",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Correct name Entered - "+fullname,Toast.LENGTH_SHORT).show();
         }
     }
 }
