@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -41,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
         if (Result.equals("False")){
             Toast.makeText(getApplicationContext(),"Incorrect name Entered - "+fullname,Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(),"Correct name Entered - "+fullname,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"Correct name Entered - "+fullname,Toast.LENGTH_SHORT).show();
+            Intent intentContactEdit = new Intent(ContactsContract.Intents.Insert.ACTION);
+            intentContactEdit.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+            intentContactEdit.putExtra(ContactsContract.Intents.Insert.NAME,fullname);
+            startActivity(intentContactEdit);
         }
     }
 }
