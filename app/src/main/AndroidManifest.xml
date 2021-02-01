@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project1">
         <activity android:name=".Contacts"></activity>
-        <activity android:name=".Input_Screen"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Input_Screen"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
