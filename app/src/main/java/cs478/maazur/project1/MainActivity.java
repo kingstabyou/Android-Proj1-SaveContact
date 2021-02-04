@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         if (Result.equals("False")){
             Toast.makeText(getApplicationContext(),"Incorrect name Entered - "+fullname,Toast.LENGTH_SHORT).show();
         } else {
+            //put type for the intents
+            //fix the way intents where written such that its original shiz
+            //use bundles to save the data sfor shifting from portrait to landscape
             //Toast.makeText(getApplicationContext(),"Correct name Entered - "+fullname,Toast.LENGTH_SHORT).show();
             Intent intentContactEdit = new Intent(ContactsContract.Intents.Insert.ACTION);
             intentContactEdit.setType(ContactsContract.RawContacts.CONTENT_TYPE);
