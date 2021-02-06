@@ -17,43 +17,28 @@ public class Input_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input__screen);
+        // take name input and run an onEditorActionListener to check on press of enter run a logic
         EditText name = (EditText) findViewById(R.id.Input_Fullname);
-        name.setImeActionLabel("Reply", EditorInfo.IME_ACTION_SEND);
+       // name.setImeActionLabel("Reply", EditorInfo.IME_ACTION_SEND);
         name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String fullname = name.getText().toString().trim();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("Message", fullname);
-                if (fullname.matches(".*\\d.*") || !fullname.contains(" ")) {
-                    setResult(RESULT_CANCELED, intent);
-                } else {
-                    setResult(RESULT_OK, intent);
+                if (event==null) {
+                    // validate name to remove leading and trailing whitespaces as well as check for any digits and spaces in a name to make it a real name
+                    String fullname = name.getText().toString().trim();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("Message", fullname);
+                    if (fullname.matches(".*\\d.*") || !fullname.contains(" ")) {
+                        setResult(RESULT_CANCELED, intent);  //send invalid result back to parent
+                    } else {
+                        setResult(RESULT_OK, intent);        //send valid result back to parent
+                    }
+                    finish();
                 }
-                finish();
-                return  true;
+                return true;
             }
         });
 
-
-
-
-/*        Button button1 =(Button)findViewById(R.id.button);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText name = (EditText) findViewById(R.id.Input_Fullname);
-                String fullname= name.getText().toString().trim();
-                Intent intent= new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("Message",fullname);
-                if(fullname.matches(".*\\d.*") || !fullname.contains(" ")) {
-                    setResult(RESULT_CANCELED, intent);
-                }else {
-                    setResult(RESULT_OK, intent);
-                }
-                finish();
-            }
-        });*/
     }
 
 }

@@ -8,37 +8,37 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="96dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="102dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="28dp"
         android:text="@string/Welcome"
-        app:layout_constraintEnd_toStartOf="@+id/Button_2"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Button_1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Button_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="134dp"
+        android:layout_height="49dp"
         android:layout_marginTop="32dp"
-        android:onClick="Enter_Name"
+        android:onClick="enter_Name"
         android:text="@string/Button_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/Button_2"
-        android:layout_width="96dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="24dp"
-        android:onClick="FetchContact"
+        android:layout_width="133dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:onClick="fetchContact"
         android:text="@string/Button_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Button_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

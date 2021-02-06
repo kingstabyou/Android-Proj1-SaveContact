@@ -1,5 +1,6 @@
 package cs478.maazur.project1;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,45 +13,63 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     String fullname;
-    String Result;
+    boolean result;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {                                            // run on create
         super.onCreate(savedInstanceState);
+        Log.i("Oncreate","ONcreate");
         setContentView(R.layout.activity_main);
     }
-    public void Enter_Name(View view){
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {                                  // save fullname and result variables so that on change of portrait variables are not disposed
+        super.onSaveInstanceState(outState);
+        outState.putString("Name",fullname);
+        outState.putBoolean("Result",result);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {                     // restore saved variables
+        super.onRestoreInstanceState(savedInstanceState);
+        fullname=savedInstanceState.getString("Name");
+        result=savedInstanceState.getBoolean("Result");
+        Log.i("Restore",fullname);
+    }
+
+
+
+    public void enter_Name(View view){                                                              // call Inputscreen activity to input name
         Intent intent = new Intent(this,Input_Screen.class);
         startActivityForResult(intent,2);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {       // check and set result variable according to the result received from Inputscreen
         super.onActivityResult(requestCode, resultCode, data);
         fullname=data.getStringExtra("Message");
-       Log.i("maaz",fullname);
+       //Log.i("maaz",fullname);
         if(resultCode==-1){
-            Result="True";
+            result=true;
         }else if (resultCode==0){
-            Result="False";
+            result=false;
         }else{
             Log.i("ee","invalid");
         }
         }
 
-    public void FetchContact(View view){
-       Log.i("maaz",fullname);
-        if (Result.equals("False")){
-            Toast.makeText(getApplicationContext(),"Incorrect name Entered - "+fullname,Toast.LENGTH_SHORT).show();
-        } else {
-            //put type for the intents
-            //fix the way intents where written such that its original shiz
-            //use bundles to save the data sfor shifting from portrait to landscape
-            //Toast.makeText(getApplicationContext(),"Correct name Entered - "+fullname,Toast.LENGTH_SHORT).show();
-            Intent intentContactEdit = new Intent(ContactsContract.Intents.Insert.ACTION);
+    public void fetchContact(View view){                                                            // create new contact with the name received from calling the first activity(using implicit intents)
+        if (result){
+            Intent intentContactEdit = new Intent(Intent.ACTION_INSERT);
             intentContactEdit.setType(ContactsContract.RawContacts.CONTENT_TYPE);
             intentContactEdit.putExtra(ContactsContract.Intents.Insert.NAME,fullname);
             startActivity(intentContactEdit);
+        } else {
+            Toast.makeText(getApplicationContext(),"Incorrect name Entered - "+fullname,Toast.LENGTH_SHORT).show();
         }
+
+
     }
 }
 
