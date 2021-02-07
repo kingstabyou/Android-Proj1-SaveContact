@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {                                            // run on create
         super.onCreate(savedInstanceState);
-        Log.i("Oncreate","ONcreate");
         setContentView(R.layout.activity_main);
     }
 
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         fullname=savedInstanceState.getString("Name");
         result=savedInstanceState.getBoolean("Result");
-        Log.i("Restore",fullname);
     }
 
 
@@ -48,24 +46,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {       // check and set result variable according to the result received from Inputscreen
         super.onActivityResult(requestCode, resultCode, data);
-        fullname=data.getStringExtra("Message");
-       //Log.i("maaz",fullname);
+        /*Integer x = resultCode;
+        Log.i("test",x.toString());*/
         if(resultCode==-1){
+            fullname=data.getStringExtra("Message");
             result=true;
-        }else if (resultCode==0){
+        }else if (resultCode==1){
+            fullname=data.getStringExtra("Message");
             result=false;
         }else{
-            Log.i("ee","invalid");
+            fullname=null;
+            result=false;
         }
         }
 
-    public void fetchContact(View view){                                                            // create new contact with the name received from calling the first activity(using implicit intents)
+
+    public void fetchContact(View view){                                                            // create new contact with the name received from calling the first activity(using implicit intents
         if (result){
             Intent intentContactEdit = new Intent(Intent.ACTION_INSERT);
             intentContactEdit.setType(ContactsContract.RawContacts.CONTENT_TYPE);
             intentContactEdit.putExtra(ContactsContract.Intents.Insert.NAME,fullname);
             startActivity(intentContactEdit);
-        } else {
+        } else if(fullname==null) {
+            Toast.makeText(getApplicationContext(),"No Name has been entered, please press Enter Name",Toast.LENGTH_SHORT).show();
+        }
+        else{
             Toast.makeText(getApplicationContext(),"Incorrect name Entered - "+fullname,Toast.LENGTH_SHORT).show();
         }
 

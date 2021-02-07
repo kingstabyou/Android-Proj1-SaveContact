@@ -28,10 +28,10 @@ public class Input_Screen extends AppCompatActivity {
                     String fullname = name.getText().toString().trim();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("Message", fullname);
-                    if (fullname.matches(".*\\d.*") || !fullname.contains(" ")) {
-                        setResult(RESULT_CANCELED, intent);  //send invalid result back to parent
+                    if (fullname.matches(".*^[A-Z a-z]+$*")&& fullname.contains(" ")) {
+                        setResult(RESULT_OK, intent);                                               //send valid result back to parent
                     } else {
-                        setResult(RESULT_OK, intent);        //send valid result back to parent
+                        setResult(RESULT_FIRST_USER, intent);                                       //send invalid result back to parent
                     }
                     finish();
                 }
@@ -41,4 +41,12 @@ public class Input_Screen extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {                                                                   // on pressing back button code execution
+        super.onBackPressed();
+        /*Log.i("test","back pressed");*/
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
 }
